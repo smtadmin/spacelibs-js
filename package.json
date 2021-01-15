@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/Thersis94/SpaceLibs-Javascript/issues"
   },
-  "homepage": "https://github.com/Thersis94/SpaceLibs-Javascript#readme"
+  "homepage": "https://github.com/Thersis94/SpaceLibs-Javascript#readme",
+  "dependencies": {
+    "create-index": "^2.6.0"
+  }
 }
