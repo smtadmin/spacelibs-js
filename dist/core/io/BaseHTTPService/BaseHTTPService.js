@@ -28,6 +28,7 @@ var BaseHTTPService = function () {
     this.settings = {
       requireSSL: config.requireSSL
     };
+    this.read.bind(this);
   }
 
   _createClass(BaseHTTPService, [{
