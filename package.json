@@ -1,0 +1,23 @@
+{
+  "name": "spacelibs-javascript",
+  "version": "1.0.0",
+  "description": "SpaceLibs-javascript package",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "npx babel src --out-dir dist --no-comments",
+    "build:watch": "npx babel src --watch --out-dir dist --no-comments"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/smt-admin/SpaceLibs-Javascript.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/smt-admin/SpaceLibs-Javascript/issues"
+  },
+  "homepage": "https://github.com/smt-admin/SpaceLibs-Javascript#readme",
+  "devDependencies": {
+    "@babel/core": "^7.12.10"
+  }
+}
