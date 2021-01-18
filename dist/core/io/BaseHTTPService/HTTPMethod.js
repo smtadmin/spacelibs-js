@@ -1,25 +1,28 @@
+"use strict";
 
-
-const GET = 'GET';
-const POST = 'POST';
-const PUT = 'PUT';
-const DELETE = 'DELETE';
-const PATCH = 'PATCH';
-const HEAD = 'HEAD';
-const TRACE = 'TRACE';
-const OPTIONS = 'OPTIONS';
-const CONNECT = 'CONNECT';
-
-const HTTPMethod = {
-  GET,
-  POST,
-  PUT,
-  DELETE,
-  PATCH,
-  HEAD,
-  TRACE,
-  OPTIONS,
-  CONNECT
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
+var GET = 'GET';
+var POST = 'POST';
+var PUT = 'PUT';
+var DELETE = 'DELETE';
+var PATCH = 'PATCH';
+var HEAD = 'HEAD';
+var TRACE = 'TRACE';
+var OPTIONS = 'OPTIONS';
+var CONNECT = 'CONNECT';
+var HTTPMethod = {
+  GET: GET,
+  POST: POST,
+  PUT: PUT,
+  DELETE: DELETE,
+  PATCH: PATCH,
+  HEAD: HEAD,
+  TRACE: TRACE,
+  OPTIONS: OPTIONS,
+  CONNECT: CONNECT
 };
-
-export default HTTPMethod;
+var _default = HTTPMethod;
+exports["default"] = _default;

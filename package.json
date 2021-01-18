@@ -18,7 +18,8 @@
   },
   "homepage": "https://github.com/smt-admin/SpaceLibs-Javascript#readme",
   "devDependencies": {
+    "@babel/cli": "^7.12.10",
     "@babel/core": "^7.12.10",
-    "babel-cli": "^6.26.0"
+    "@babel/preset-env": "^7.12.11"
   }
 }
