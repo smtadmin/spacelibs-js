@@ -1,22 +1,25 @@
 {
   "name": "spacelibs-javascript",
   "version": "1.0.0",
-  "description": "Space stuff",
-  "main": "index.js",
+  "description": "SpaceLibs-javascript package",
+  "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "npx babel src --out-dir dist --no-comments",
+    "build:watch": "npx babel src --watch --out-dir dist --no-comments"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Thersis94/SpaceLibs-Javascript.git"
+    "url": "git+https://github.com/smt-admin/SpaceLibs-Javascript.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Thersis94/SpaceLibs-Javascript/issues"
+    "url": "https://github.com/smt-admin/SpaceLibs-Javascript/issues"
   },
-  "homepage": "https://github.com/Thersis94/SpaceLibs-Javascript#readme",
-  "dependencies": {
-    "create-index": "^2.6.0"
+  "homepage": "https://github.com/smt-admin/SpaceLibs-Javascript#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.12.10",
+    "@babel/core": "^7.12.10",
+    "@babel/preset-env": "^7.12.11"
   }
 }
