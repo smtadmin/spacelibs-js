@@ -7,11 +7,10 @@
  * Copyright (c) 2021 Silicon Mountain Technologies
  */
 
-import HTTPMethod from './HTTPMethod';
+import HTTPMethod from './HTTPMethod.js';
 import axios from 'axios';
 
 export default class BaseHTTPService {
-
 	/**
 	 * Constructor for the Base HTTP Service
 	 * @param {Object} config Configuration data that will effect aspects of requests.

@@ -26,7 +26,7 @@ it("Makes a read request without crashing", async () => {
   }
 
 });
-
+ 
 it("Makes a insert request without crashing", () => {
   const cancelToken = service.insert(null, null, onSuccess, null);
 
