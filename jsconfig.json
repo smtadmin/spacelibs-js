@@ -1,0 +1,18 @@
+/*
+ * Filename: /home/justinjeffrey/User/Code/USSF/SpaceLibs-Javascript/jsconfig.json
+ * Path: /home/justinjeffrey/User/Code/USSF/SpaceLibs-Javascript
+ * Created Date: Monday, January 18th 2021, 4:35:01 pm
+ * Author: Justin Jeffrey
+ * 
+ * Copyright (c) 2021 SMT
+ */
+{
+	"compilerOptions": {
+		"module": "commonjs",
+        "target": "es6",
+        "allowSyntheticDefaultImports": true
+	},
+	"exclude": [
+		"node_modules"
+	]
+}

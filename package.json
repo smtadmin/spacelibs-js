@@ -1,19 +1,38 @@
 {
   "name": "spacelibs-javascript",
   "version": "1.0.0",
-  "description": "Space stuff",
-  "main": "index.js",
+  "description": "SpaceLibs-javascript package",
+  "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "npx babel src --out-dir dist --no-comments",
+    "build:watch": "npx babel src --watch --out-dir dist --no-comments",
+    "test": "npm run test:dev",
+    "test:dev": "jest --roots 'src' --coverage",
+    "test:prod": "jest"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Thersis94/SpaceLibs-Javascript.git"
+    "url": "git+https://github.com/smt-admin/SpaceLibs-Javascript.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Thersis94/SpaceLibs-Javascript/issues"
+    "url": "https://github.com/smt-admin/SpaceLibs-Javascript/issues"
   },
-  "homepage": "https://github.com/Thersis94/SpaceLibs-Javascript#readme"
+  "homepage": "https://github.com/smt-admin/SpaceLibs-Javascript#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.12.10",
+    "@babel/core": "^7.12.10",
+    "@babel/plugin-proposal-class-properties": "^7.12.1",
+    "@babel/plugin-transform-runtime": "^7.12.10",
+    "@babel/preset-env": "^7.12.11",
+    "babel-jest": "^26.6.3",
+    "babel-polyfill": "^6.26.0",
+    "import-local": "^3.0.2",
+    "jest": "^26.6.3",
+    "react-test-renderer": "^17.0.1"
+  },
+  "dependencies": {
+    "axios": "^0.21.1"
+  }
 }

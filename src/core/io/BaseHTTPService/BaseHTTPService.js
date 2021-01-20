@@ -30,6 +30,8 @@ export default class BaseHTTPService {
 		this.settings = {
 			requireSSL : config.requireSSL
 		};
+
+		this.read.bind(this);
 	}
 
 	/**
