@@ -1,22 +1,36 @@
 /*
- * Filename: /home/justinjeffrey/User/Code/TerminalVelocity/Columbiad/Service-Layer-Example/src/BaseHTTPService.test.js
- * Path: /home/justinjeffrey/User/Code/TerminalVelocity/Columbiad/Service-Layer-Example
- * Created Date: Wednesday, January 13th 2021, 4:53:31 pm
- * Author: Justin Jeffrey
- * 
- * Copyright (c) 2021 Your Company
+ * File: BaseHTTPService.test
+ * Version: 1.0.9
+ * Project: spacelibs-javascript
+ * Description: Tests for the BaseHTTP Service
+ * File Created: Monday, 18th January 2021 3:42 pm
+ * Author: Justin Jeffrey (justin.jeffrey@siliconmtn.com)
+ * -----
+ * Last Modified: Thursday, 21st January 2021 3:45 pm
+ * Modified By: Justin Jeffrey (justin.jeffrey@siliconmtn.com>)
+ * -----
+ * Copyright 2021, Silicon Mountain Technologies, Inc.
  */
 
-import GenericHTTPService from './BaseHTTPService';
+import BaseHTTPService from './BaseHTTPService';
 
+
+/**
+ * Default settings for Generic HTTPService 
+ * @type {object}  
+ */
 const defaultSettings = {
   host: "testHost",
   timeoutInterval: 30,
   requireSSL: true,
 };
 
-const service = new GenericHTTPService(defaultSettings);
+/** @type {BaseHTTPService} */
+const service = new BaseHTTPService(defaultSettings);
 
+/**
+ * Attempts to make a read request and asserts that the returned data.message is equal to "The request was successful"
+ */
 it("Makes a read request without crashing", async () => {
   const cancelToken = service.read(null, null, onSuccess, null);
 
@@ -27,6 +41,9 @@ it("Makes a read request without crashing", async () => {
 
 });
  
+/**
+ * Attempts to make a insert request and asserts that the returned data.message is equal to "The request was successful"
+ */
 it("Makes a insert request without crashing", () => {
   const cancelToken = service.insert(null, null, onSuccess, null);
 
@@ -36,6 +53,9 @@ it("Makes a insert request without crashing", () => {
   }
 });
 
+/**
+ * Attempts to make a update request and asserts that the returned data.message is equal to "The request was successful"
+ */
 it("Makes a update request without crashing", () => {
   const cancelToken = service.update(null, null, onSuccess, null);
 
@@ -45,6 +65,9 @@ it("Makes a update request without crashing", () => {
   }
 });
 
+/**
+ * Attempts to make a delete request and asserts that the returned data.message is equal to "The request was successful"
+ */
 it("Makes a delete request without crashing", () => {
   const cancelToken = service.delete(null, null, onSuccess, null);
 
@@ -54,6 +77,9 @@ it("Makes a delete request without crashing", () => {
   }
 });
 
+/**
+ * Attempts to make a standard request and asserts that the returned data.message is equal to "The request was successful"
+ */
 it("Makes a standard request without crashing", () => {
   const cancelToken = service.request("GET", null, null, onSuccess, null, null, {});
 
@@ -63,6 +89,9 @@ it("Makes a standard request without crashing", () => {
   }
 });
 
+/**
+ * Attempts to make a standard request with a non standard method parameter and asserts that an error event took place
+ */
 it("Gets a warning if the method is undefined", () => {
 
   const errorEvent = jest
@@ -74,6 +103,9 @@ it("Gets a warning if the method is undefined", () => {
 
 });
 
+/**
+ * Attempts to make a standard request without the options object and asserts that a warn event was thrown but the request was still successful
+ */
 it("Validates option validation is working", async () => {
 
   const warnEvent = jest
@@ -90,6 +122,9 @@ it("Validates option validation is working", async () => {
 
 });
 
+/**
+ * Attempts a standard request with an added header and asserts that the header was added and that the request was successful
+ */
 it("Validates headers are added properly", async () => {
 
   const options = {
@@ -106,6 +141,10 @@ it("Validates headers are added properly", async () => {
 
 });
 
+/**
+ * It attempts an uploadFile request with an added header and asserts that the request was successful
+ * and that the Content-Type: multipart/form-data header was present. It also asserts that the file was passed as expected
+ */
 it("Makes a uploadFile request without crashing", () => {
   const options = {
     headers: "Test-Header"
@@ -126,6 +165,9 @@ it("Makes a uploadFile request without crashing", () => {
 
 });
 
+/**
+ * Attempts a standard request with a data object that has an error. Asserts that an error event was thrown and that the error message was equal to "BOOM"
+ */
 it("onFailure returns when the request fails", () => {
   const data = {
     error: true

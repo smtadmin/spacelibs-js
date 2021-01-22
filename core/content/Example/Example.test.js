@@ -2,7 +2,7 @@
  * File: Example.test
  * Version: 1.0.7
  * Project: spacelibs-javascript
- * Description: INSERT DESCRIPTION
+ * Description: Example test for a spacelibs-js module
  * File Created: Wednesday, 20th January 2021 3:15:07 pm
  * Author: Justin Jeffrey (justin.jeffrey@siliconmtn.com)
  * -----
