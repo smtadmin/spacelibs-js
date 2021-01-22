@@ -18,6 +18,13 @@ import forms from './forms';
 import security from './security';
 import io from './io';
 
+export default {
+	content: content,
+	data: data,
+	forms: forms,
+	security: security,
+	io: io
+}
 
 export {
 	content,

@@ -26,9 +26,8 @@ npm run docs
 
 This will generate docs in the `/doc` directory, to view them open the `/doc/index.html` file.
 
-# Run test coverage
 
-```
+
 npm run test
 ```
 
