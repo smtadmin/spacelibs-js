@@ -18,9 +18,8 @@ import axios from 'axios';
 
 /**
  * Class representing the BaseHTTPService
- * @module BaseHTTPService
  */
-export default class BaseHTTPService {
+class BaseHTTPService {
 	
 	 /**
 	  * Constructor for the Base HTTP Service
@@ -190,3 +189,5 @@ export default class BaseHTTPService {
 		return cancelTokenSource;
 	}
 }
+
+export default BaseHTTPService;

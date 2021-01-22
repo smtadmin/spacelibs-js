@@ -1,7 +1,8 @@
 {
 	"source":{
 		"includePattern": ".+\\.js$",
-		"include": ["./core"]
+		"include": ["./core"],
+		"excludePattern": ".test.js$"
 	},
 	"opts": {
 		"template": "./node_modules/better-docs",
