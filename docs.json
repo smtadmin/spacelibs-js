@@ -1,7 +1,7 @@
 {
 	"source":{
 		"includePattern": ".+\\.js$",
-		"include": ["./core"],
+		"include": ["./src/core"],
 		"excludePattern": ".test.js$"
 	},
 	"opts": {

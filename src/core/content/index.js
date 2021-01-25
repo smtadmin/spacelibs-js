@@ -6,7 +6,7 @@
  * File Created: Wednesday, 20th January 2021 3:11 pm
  * Author: Justin Jeffrey (justin.jeffrey@siliconmtn.com)
  * -----
- * Last Modified: Thursday, 21st January 2021 8:50 am
+ * Last Modified: Friday, 22nd January 2021 4:52 pm
  * Modified By: Justin Jeffrey (justin.jeffrey@siliconmtn.com>)
  * -----
  * Copyright 2021, Silicon Mountain Technologies, Inc.
@@ -16,4 +16,8 @@ import Example from './Example/index.js';
 
 export default {
 	Example: Example
+}
+
+export {
+	Example
 }
