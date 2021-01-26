@@ -6,21 +6,16 @@
  * File Created: Wednesday, 20th January 2021 3:11 pm
  * Author: Justin Jeffrey (justin.jeffrey@siliconmtn.com)
  * -----
- * Last Modified: Thursday, 21st January 2021 3:55 pm
+ * Last Modified: Thursday, 21st January 2021 9:03 am
  * Modified By: Justin Jeffrey (justin.jeffrey@siliconmtn.com>)
  * -----
  * Copyright 2021, Silicon Mountain Technologies, Inc.
  */
 
-import BaseHTTPService from './BaseHTTPService';
-import HTTPMethod from './HTTPMethod';
+ /** 
+  * An index file is needed in a module folder to export it, so when 
+  */
 
-export default {
-	BaseHTTPService: BaseHTTPService,
-	HTTPMethod: HTTPMethod
-}
+import Example from './Example';
 
-export { 
-	BaseHTTPService, 
-	HTTPMethod 
-}
+export default Example;

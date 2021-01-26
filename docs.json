@@ -1,0 +1,28 @@
+{
+	"source":{
+		"includePattern": ".+\\.js$",
+		"include": ["./src/core"],
+		"excludePattern": ".test.js$"
+	},
+	"opts": {
+		"template": "./node_modules/better-docs",
+		"destination": "./docs/", 
+		"readme": "README.md",          
+        "recurse": true                         
+	},
+	"templates" : {
+		"search": true,
+		"better-docs": {
+			"name": "spacelibs-js",
+            "title": "spacelibs-js |", 
+            "css": "style.css",
+			"navLinks": [
+				{
+					"label": "Github",
+					"href": "https://github.com/smt-admin/spacelibs-js"
+				}
+			]
+		}
+	}
+	
+}
