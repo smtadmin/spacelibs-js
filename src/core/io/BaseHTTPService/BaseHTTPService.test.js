@@ -1,13 +1,13 @@
 /*
- * File: BaseHTTPService.test
- * Version: 1.0.9
- * Project: spacelibs-javascript
+ * File: /src/core/io/BaseHTTPService/BaseHTTPService.test.js
+ * Version: 0.0.1
+ * Project: spacelibs-js
  * Description: Tests for the BaseHTTP Service
  * File Created: Monday, 18th January 2021 3:42 pm
  * Author: Justin Jeffrey (justin.jeffrey@siliconmtn.com)
  * -----
- * Last Modified: Thursday, 21st January 2021 3:45 pm
- * Modified By: Justin Jeffrey (justin.jeffrey@siliconmtn.com>)
+ * Last Modified: Friday, 29th January 2021 3:27 pm
+ * Modified By: tyler Gaffaney (tyler.gaffaney@siliconmtn.com>)
  * -----
  * Copyright 2021, Silicon Mountain Technologies, Inc.
  */

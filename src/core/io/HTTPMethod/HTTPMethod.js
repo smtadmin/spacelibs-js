@@ -1,13 +1,13 @@
 /*
- * File: HTTPMethod
- * Version: 1.0.9
+ * File: /src/core/io/HTTPMethod/HTTPMethod.js
+ * Version: 0.0.1
  * Project: spacelibs-javascript
  * Description: This enum contains all possible HTTP Method types
  * File Created: Monday, 18th January 2021 3:42 pm
  * Author: Justin Jeffrey (justin.jeffrey@siliconmtn.com)
  * -----
- * Last Modified: Thursday, 21st January 2021 3:30 pm
- * Modified By: Justin Jeffrey (justin.jeffrey@siliconmtn.com>)
+ * Last Modified: Friday, 29th January 2021 3:24 pm
+ * Modified By: tyler Gaffaney (tyler.gaffaney@siliconmtn.com>)
  * -----
  * Copyright 2021, Silicon Mountain Technologies, Inc.
  */
