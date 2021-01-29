@@ -1,10 +1,15 @@
 /*
- * Filename: /home/justinjeffrey/User/Code/TerminalVelocity/Columbiad/Service-Layer-Example/src/__mocks__/axios.js
- * Path: /home/justinjeffrey/User/Code/TerminalVelocity/Columbiad/Service-Layer-Example
- * Created Date: Wednesday, January 13th 2021, 5:10:22 pm
- * Author: Justin Jeffrey
- * 
- * Copyright (c) 2021 Your Company
+ * File: /src/core/io/BaseHTTPService/__mocks__/axios.js
+ * Version: 0.0.1
+ * Project: spacelibs-js
+ * Description: This is a mock for the axios service
+ * File Created: Thursday, 28th January 2021 1:35 pm
+ * Author: tyler Gaffaney (tyler.gaffaney@siliconmtn.com)
+ * -----
+ * Last Modified: Friday, 29th January 2021 3:29 pm
+ * Modified By: tyler Gaffaney (tyler.gaffaney@siliconmtn.com>)
+ * -----
+ * Copyright 2021, Silicon Mountain Technologies, Inc.
  */
 
 module.exports = {

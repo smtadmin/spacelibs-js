@@ -1,13 +1,13 @@
 /*
- * File: BaseHTTPService
- * Version: 1.0.9
- * Project: spacelibs-javascript
+ * File: /src/core/io/BaseHTTPService/BaseHTTPService.js
+ * Version: 0.0.1
+ * Project: spacelibs-js
  * Description: This a generic HTTP Service class. You can construct the class with some optional configuration.  There are convenience methods such as read, insert, update, delete, uploadFile, which all transform the request and call 'request' which is the generic request method.
  * File Created: Monday, 18th January 2021 3:42 pm
  * Author: Tyler Gaffaney (tyler.gaffaney@siliconmtn.com)
  * -----
- * Last Modified: Monday, 25th January 2021 10:54 am
- * Modified By: Justin Jeffrey (justin.jeffrey@siliconmtn.com>)
+ * Last Modified: Friday, 29th January 2021 3:27 pm
+ * Modified By: tyler Gaffaney (tyler.gaffaney@siliconmtn.com>)
  * -----
  * Copyright 2021, Silicon Mountain Technologies, Inc.
  */

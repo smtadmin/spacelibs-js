@@ -1,4 +1,4 @@
-# How to import modules from this library
+## How to import modules from this library
 
 These are the steps on using modules from the `spacelibs-js` library.
 
@@ -12,13 +12,14 @@ These are the steps on using modules from the `spacelibs-js` library.
 	```js
 	import { BaseHTTPService, HTTPMethod } from 'spacelibs-js/core/io'
 	```
-	or you can import as a `default` import
+	or as a `default` import
 	```js
 	import BaseHTTPService from 'spacelibs-js/core/io/BaseHTTPService'
 	```
 
+## Generate JS Docs
 
-# Generate JS Docs
+To generate JSDocs pages for this package, run the following `npm` command
 
 ```
 npm run docs
@@ -26,11 +27,11 @@ npm run docs
 
 This will generate docs in the `/doc` directory, to view them open the `/doc/index.html` file.
 
+## Run tests
 
+To run all tests with coverage, run the following `npm` command
 
+```
 npm run test
 ```
 
-This will run `jest` for all of your test cases
-
-##

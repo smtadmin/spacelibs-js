@@ -1,19 +1,15 @@
 /*
- * File: Example.test
- * Version: 1.0.7
- * Project: spacelibs-javascript
+ * File: /src/core/content/Example/Example.test.js
+ * Version: 0.0.1
+ * Project: spacelibs-js
  * Description: Example test for a spacelibs-js module
- * File Created: Wednesday, 20th January 2021 3:15:07 pm
- * Author: Justin Jeffrey (justin.jeffrey@siliconmtn.com)
+ * File Created: Thursday, 28th January 2021 1:35 pm
+ * Author: tyler Gaffaney (tyler.gaffaney@siliconmtn.com)
  * -----
- * Last Modified: Wednesday, 20th January 2021 3:56:20 pm
- * Modified By: Justin Jeffrey (justin.jeffrey@siliconmtn.com>)
+ * Last Modified: Friday, 29th January 2021 3:30 pm
+ * Modified By: tyler Gaffaney (tyler.gaffaney@siliconmtn.com>)
  * -----
  * Copyright 2021, Silicon Mountain Technologies, Inc.
- * -----
- * HISTORY:
- * Date      	By	Comments
- * ----------	---	---------------------------------------------------------
  */
 
 import Example from './Example';

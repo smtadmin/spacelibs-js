@@ -1,27 +1,28 @@
 /*
- * File: index
- * Version: 1.0.10
- * Project: spacelibs-javascript
- * Description: Index.js files are here to provide easy entry points for components. (They simplify imports.)   
- * File Created: Thursday, 21st January 2021 4:36 pm
- * Author: Justin Jeffrey (justin.jeffrey@siliconmtn.com)
+ * File: /src/core/index.js
+ * Version: 0.0.1
+ * Project: spacelibs-js
+ * Description: INSERT DESCRIPTION
+ * File Created: Thursday, 28th January 2021 1:35 pm
+ * Author: tyler Gaffaney (tyler.gaffaney@siliconmtn.com)
  * -----
- * Last Modified: Thursday, 21st January 2021 4:37 pm
- * Modified By: Justin Jeffrey (justin.jeffrey@siliconmtn.com>)
+ * Last Modified: Friday, 29th January 2021 3:25 pm
+ * Modified By: tyler Gaffaney (tyler.gaffaney@siliconmtn.com>)
  * -----
  * Copyright 2021, Silicon Mountain Technologies, Inc.
  */
+
 
 import content from './content';
 import data from './data';
 import forms from './forms';
 import security from './security';
-import io from './io';
+import io from './io/index';
 
 export default {
 	content: content,
 	data: data,
-	forms: forms,
+	forms: forms, 
 	security: security,
 	io: io
 }
