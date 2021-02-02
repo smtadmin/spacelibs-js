@@ -6,12 +6,11 @@
  * File Created: Thursday, 28th January 2021 1:35 pm
  * Author: tyler Gaffaney (tyler.gaffaney@siliconmtn.com)
  * -----
- * Last Modified: Friday, 29th January 2021 3:26 pm
+ * Last Modified: Tuesday, 2nd February 2021 2:39 pm
  * Modified By: tyler Gaffaney (tyler.gaffaney@siliconmtn.com>)
  * -----
  * Copyright 2021, Silicon Mountain Technologies, Inc.
  */
-
 
 import BaseHTTPService from './BaseHTTPService';
 import HTTPMethod from './HTTPMethod';
@@ -19,9 +18,9 @@ import HTTPMethod from './HTTPMethod';
 export default {
 	BaseHTTPService: BaseHTTPService,
 	HTTPMethod: HTTPMethod
-}
+};
 
 export {
 	BaseHTTPService,
 	HTTPMethod
-}
+};

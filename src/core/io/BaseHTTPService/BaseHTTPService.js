@@ -6,7 +6,7 @@
  * File Created: Monday, 18th January 2021 3:42 pm
  * Author: Tyler Gaffaney (tyler.gaffaney@siliconmtn.com)
  * -----
- * Last Modified: Friday, 29th January 2021 3:27 pm
+ * Last Modified: Tuesday, 2nd February 2021 2:38 pm
  * Modified By: tyler Gaffaney (tyler.gaffaney@siliconmtn.com>)
  * -----
  * Copyright 2021, Silicon Mountain Technologies, Inc.
@@ -32,7 +32,7 @@ class BaseHTTPService {
 		this.axiosInstance = axios.create({
 			baseURL: config.host,
 			timeout: config.timeoutInterval
-		})
+		});
 
 		this.settings = {
 			requireSSL : config.requireSSL
@@ -105,7 +105,7 @@ class BaseHTTPService {
 	uploadFile(url, file, onSuccess, onFailure, onUploadProgress, options = {}){
 		options.headers = {
 			"Content-Type" : "multipart/form-data"	
-		}
+		};
 		var formData = new FormData();
 		formData.append("file", file);
 		this.request(HTTPMethod.POST, url, formData, onSuccess, onFailure, onUploadProgress, options);
@@ -174,7 +174,7 @@ class BaseHTTPService {
 		}).catch((error) => {
 			// Transfrom from Axios Error to whatever
 			onFailure(error);
-		})
+		});
 		return cancelTokenSource;
 	}
 }
