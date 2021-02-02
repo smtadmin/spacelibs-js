@@ -1,15 +1,16 @@
 {
-  "name": "spacelibs-js",
+  "name": "@siliconmtn/spacelibs-js",
   "version": "0.0.1",
   "description": "spacelibs-js package",
   "main": "./core/index.js",
   "module": "./src/core/index.js",
   "scripts": {
-    "build": "npx babel ./src -d ./ --config-file ./.babelrc & npx tsc --rootDir src/ --emitDeclarationOnly --diagnostics",
-	"build:watch": "npx babel ./src -w -d ./ --config-file ./.babelrc",
-	"buildTypes": "npx tsc --watch --rootDir src/",
+    "build": "npx babel ./src -d ./ --config-file ./.babelrc & npx tsc --rootDir src/ --emitDeclarationOnly",
+    "build:watch": "npx babel ./src -w -d ./ --config-file ./.babelrc",
+    "buildTypes": "npx tsc --rootDir src/",
     "buildTypes:watch": "npx tsc --watch --rootDir src/ --emitDeclarationOnly",
     "test": "jest --coverage",
+    "test:watch": "jest --coverage --watch",
     "test:prod": "jest",
     "semantic-release": "semantic-release",
     "docs": "npx jsdoc -c docs.json -r"
@@ -27,14 +28,14 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/smt-admin/SpaceLibs-Javascript.git"
+    "url": "git+https://github.com/smtadmin/spacelibs-js.git"
   },
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/smt-admin/SpaceLibs-Javascript/issues"
+    "url": "https://github.com/smtadmin/spacelibs-js/issues"
   },
-  "homepage": "https://github.com/smt-admin/SpaceLibs-Javascript#readme",
+  "homepage": "https://github.com/smtadmin/spacelibs-js#readme",
   "devDependencies": {
     "@babel/cli": "^7.12.10",
     "@babel/core": "^7.12.10",
@@ -53,6 +54,7 @@
     "babel-plugin-transform-class-properties": "^6.24.1",
     "better-docs": "^2.3.2",
     "eslint": "^7.18.0",
+    "eslint-plugin-jest": "^24.1.3",
     "eslint-plugin-jsdoc": "^31.3.3",
     "import-local": "^3.0.2",
     "jest": "^26.6.3",

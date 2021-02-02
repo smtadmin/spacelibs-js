@@ -6,7 +6,7 @@
  * File Created: Thursday, 28th January 2021 1:35 pm
  * Author: tyler Gaffaney (tyler.gaffaney@siliconmtn.com)
  * -----
- * Last Modified: Friday, 29th January 2021 3:29 pm
+ * Last Modified: Tuesday, 2nd February 2021 2:51 pm
  * Modified By: tyler Gaffaney (tyler.gaffaney@siliconmtn.com>)
  * -----
  * Copyright 2021, Silicon Mountain Technologies, Inc.
@@ -51,11 +51,11 @@ module.exports = {
         }
 
         if(data.headers) {
-            headers = data.headers
+            headers = data.headers;
         }
         
         if(data.data) {
-            file = data.data
+            file = data.data;
         }
 
         return Promise.resolve({
@@ -65,6 +65,6 @@ module.exports = {
                 success: true,
                 message: "The request was successful"
             }
-        })
+        });
     }
 };

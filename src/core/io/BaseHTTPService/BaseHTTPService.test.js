@@ -6,7 +6,7 @@
  * File Created: Monday, 18th January 2021 3:42 pm
  * Author: Justin Jeffrey (justin.jeffrey@siliconmtn.com)
  * -----
- * Last Modified: Friday, 29th January 2021 3:27 pm
+ * Last Modified: Tuesday, 2nd February 2021 2:39 pm
  * Modified By: tyler Gaffaney (tyler.gaffaney@siliconmtn.com>)
  * -----
  * Copyright 2021, Silicon Mountain Technologies, Inc.
@@ -32,11 +32,16 @@ const service = new BaseHTTPService(defaultSettings);
  * Attempts to make a read request and asserts that the returned data.message is equal to "The request was successful"
  */
 it("Makes a read request without crashing", async () => {
-  const cancelToken = service.read(null, null, onSuccess, null);
+  service.read(null, null, onSuccess, null);
 
+  /**
+   * Callback function to test the response of the api call
+   *
+   * @param {object} response - Response object returned from BaseHTTPService
+   */
   function onSuccess(response) {
-    expect(response.data.success).toBe(true)
-    expect(response.data.message).toBe("The request was successful")
+    expect(response.data.success).toBe(true);
+    expect(response.data.message).toBe("The request was successful");
   }
 
 });
@@ -45,11 +50,16 @@ it("Makes a read request without crashing", async () => {
  * Attempts to make a insert request and asserts that the returned data.message is equal to "The request was successful"
  */
 it("Makes a insert request without crashing", () => {
-  const cancelToken = service.insert(null, null, onSuccess, null);
-
+  service.insert(null, null, onSuccess, null);
+  
+  /**
+   * Callback function to test the response of the api call
+   *
+   * @param {object} response - Response object returned from BaseHTTPService
+   */
   function onSuccess(response) {
-    expect(response.data.success).toBe(true)
-    expect(response.data.message).toBe("The request was successful")
+    expect(response.data.success).toBe(true);
+    expect(response.data.message).toBe("The request was successful");
   }
 });
 
@@ -57,11 +67,16 @@ it("Makes a insert request without crashing", () => {
  * Attempts to make a update request and asserts that the returned data.message is equal to "The request was successful"
  */
 it("Makes a update request without crashing", () => {
-  const cancelToken = service.update(null, null, onSuccess, null);
+  service.update(null, null, onSuccess, null);
 
+  /**
+   * Callback function to test the response of the api call
+   *
+   * @param {object} response - Response object returned from BaseHTTPService
+   */
   function onSuccess(response) {
-    expect(response.data.success).toBe(true)
-    expect(response.data.message).toBe("The request was successful")
+    expect(response.data.success).toBe(true);
+    expect(response.data.message).toBe("The request was successful");
   }
 });
 
@@ -69,11 +84,16 @@ it("Makes a update request without crashing", () => {
  * Attempts to make a delete request and asserts that the returned data.message is equal to "The request was successful"
  */
 it("Makes a delete request without crashing", () => {
-  const cancelToken = service.delete(null, null, onSuccess, null);
+  service.delete(null, null, onSuccess, null);
 
+  /**
+   * Callback function to test the response of the api call
+   *
+   * @param {object} response - Response object returned from BaseHTTPService
+   */
   function onSuccess(response) {
-    expect(response.data.success).toBe(true)
-    expect(response.data.message).toBe("The request was successful")
+    expect(response.data.success).toBe(true);
+    expect(response.data.message).toBe("The request was successful");
   }
 });
 
@@ -81,11 +101,16 @@ it("Makes a delete request without crashing", () => {
  * Attempts to make a standard request and asserts that the returned data.message is equal to "The request was successful"
  */
 it("Makes a standard request without crashing", () => {
-  const cancelToken = service.request("GET", null, null, onSuccess, null, null, {});
+  service.request("GET", null, null, onSuccess, null, null, {});
 
+  /**
+   * Callback function to test the response of the api call
+   *
+   * @param {object} response - Response object returned from BaseHTTPService
+   */
   function onSuccess(response) {
-    expect(response.data.success).toBe(true)
-    expect(response.data.message).toBe("The request was successful")
+    expect(response.data.success).toBe(true);
+    expect(response.data.message).toBe("The request was successful");
   }
 });
 
@@ -115,9 +140,14 @@ it("Validates option validation is working", async () => {
   service.request("GET", null, null, onSuccess, null, null);
   expect(warnEvent).toHaveBeenCalled();
 
+  /**
+   * Callback function to test the response of the api call
+   *
+   * @param {object} response - Response object returned from BaseHTTPService
+   */
   function onSuccess(response) {
-    expect(response.data.success).toBe(true)
-    expect(response.data.message).toBe("The request was successful")
+    expect(response.data.success).toBe(true);
+    expect(response.data.message).toBe("The request was successful");
   }
 
 });
@@ -129,14 +159,19 @@ it("Validates headers are added properly", async () => {
 
   const options = {
     headers: "Test-Header"
-  }
+  };
 
   service.request("GET", null, null, onSuccess, null, null, options);
 
+  /**
+   * Callback function to test the response of the api call
+   *
+   * @param {object} response - Response object returned from BaseHTTPService
+   */
   function onSuccess(response) {
-    expect(response.data.success).toBe(true)
-    expect(response.data.message).toBe("The request was successful")
-    expect(response.data.headers).toBe("Test-Header")
+    expect(response.data.success).toBe(true);
+    expect(response.data.message).toBe("The request was successful");
+    expect(response.data.headers).toBe("Test-Header");
   }
 
 });
@@ -146,19 +181,26 @@ it("Validates headers are added properly", async () => {
  * and that the Content-Type: multipart/form-data header was present. It also asserts that the file was passed as expected
  */
 it("Makes a uploadFile request without crashing", () => {
-  const options = {
-    headers: "Test-Header"
-  }
+	
+  service.uploadFile(null, "test", onSuccess, onFailure, null, undefined);
 
-  const cancelToken = service.uploadFile(null, "test", onSuccess, onFailure, null, undefined);
-
+  /**
+   * Callback function to test the response of the api call
+   *
+   * @param {object} response - Response object returned from BaseHTTPService
+   */
   function onSuccess(response) {
-    expect(response.data.success).toBe(true)
-    expect(response.data.message).toBe("The request was successful")
-    expect(response.data.headers).toStrictEqual({ "Content-Type": "multipart/form-data" })
-    expect(response.data.file.get("file")).toBe("test")
+    expect(response.data.success).toBe(true);
+    expect(response.data.message).toBe("The request was successful");
+    expect(response.data.headers).toStrictEqual({ "Content-Type": "multipart/form-data" });
+    expect(response.data.file.get("file")).toBe("test");
   }
 
+  /**
+   * Callback function to test the response of the api call
+   *
+   * @param {object} error - Error object returned from BaseHTTPService
+   */
   function onFailure(error) {
     console.log(error);
   }
@@ -171,16 +213,21 @@ it("Makes a uploadFile request without crashing", () => {
 it("onFailure returns when the request fails", () => {
   const data = {
     error: true
-  }
+  };
 
   const options = {
     headers: "Test-Header"
-  }
+  };
 
   service.request("GET", null, data, null, onFailure, null, options);
 
+  /**
+   * Callback function to test the response of the api call
+   *
+   * @param {object} error - Error object returned from BaseHTTPService
+   */
   function onFailure(error) {
-    expect(error).toBe("BOOM")
+    expect(error).toBe("BOOM");
   }
 
 });
