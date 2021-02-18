@@ -6,7 +6,7 @@
  * File Created: Monday, 18th January 2021 3:42 pm
  * Author: Tyler Gaffaney (tyler.gaffaney@siliconmtn.com)
  * -----
- * Last Modified: Tuesday, 2nd February 2021 2:38 pm
+ * Last Modified: Thursday, 18th February 2021 3:21 pm
  * Modified By: tyler Gaffaney (tyler.gaffaney@siliconmtn.com>)
  * -----
  * Copyright 2021, Silicon Mountain Technologies, Inc.
@@ -37,7 +37,6 @@ class BaseHTTPService {
 		this.settings = {
 			requireSSL : config.requireSSL
 		};
-
 	}
 
 	/**
@@ -133,8 +132,13 @@ class BaseHTTPService {
 			return;
 		}
 
-		const requestConfig = {};
+		let requestConfig = {};
 
+		/**
+		 * Add url
+		 */
+		requestConfig.url = url;
+		
 		/**
 		 * Validate options
 		 */
@@ -167,7 +171,6 @@ class BaseHTTPService {
 		 */
 		const cancelTokenSource = axios.CancelToken.source();
 		requestConfig.cancelToken = cancelTokenSource.token;
-
 		axios.request(requestConfig).then((response) => {
 			// Transform it from an Axios response to whatever
 			onSuccess(response);
