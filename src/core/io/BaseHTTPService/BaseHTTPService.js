@@ -6,7 +6,7 @@
  * File Created: Monday, 18th January 2021 3:42 pm
  * Author: Tyler Gaffaney (tyler.gaffaney@siliconmtn.com)
  * -----
- * Last Modified: Thursday, 18th February 2021 3:21 pm
+ * Last Modified: Thursday, 18th February 2021 3:45 pm
  * Modified By: tyler Gaffaney (tyler.gaffaney@siliconmtn.com>)
  * -----
  * Copyright 2021, Silicon Mountain Technologies, Inc.
@@ -27,7 +27,6 @@ class BaseHTTPService {
 	 * @memberof BaseHTTPService
 	 */
 	constructor(config){
-
 		// Axios Instance
 		this.axiosInstance = axios.create({
 			baseURL: config.host,
@@ -132,12 +131,9 @@ class BaseHTTPService {
 			return;
 		}
 
-		let requestConfig = {};
-
-		/**
-		 * Add url
-		 */
-		requestConfig.url = url;
+		let requestConfig = {
+			url: url
+		};
 		
 		/**
 		 * Validate options
