@@ -6,8 +6,8 @@
  * File Created: Monday, 18th January 2021 3:42 pm
  * Author: Tyler Gaffaney (tyler.gaffaney@siliconmtn.com)
  * -----
- * Last Modified: Thursday, 18th February 2021 3:21 pm
- * Modified By: tyler Gaffaney (tyler.gaffaney@siliconmtn.com>)
+ * Last Modified: Monday, 22nd February 2021 3:30 pm
+ * Modified By: Justin Jeffrey (justin.jeffrey@siliconmtn.com>)
  * -----
  * Copyright 2021, Silicon Mountain Technologies, Inc.
  */
@@ -138,7 +138,11 @@ class BaseHTTPService {
 		 * Add url
 		 */
 		requestConfig.url = url;
-		
+
+		/**
+		 * Add HTTP Method
+		 */
+		requestConfig.method = HTTPMethod[method];
 		/**
 		 * Validate options
 		 */
