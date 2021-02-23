@@ -131,10 +131,19 @@ class BaseHTTPService {
 			return;
 		}
 
-		let requestConfig = {
-			url: url
-		};
-		
+
+		let requestConfig = {};
+
+		/**
+		 * Add url
+		 */
+		requestConfig.url = url;
+
+		/**
+		 * Add HTTP Method
+		 */
+		requestConfig.method = HTTPMethod[method];
+
 		/**
 		 * Validate options
 		 */
