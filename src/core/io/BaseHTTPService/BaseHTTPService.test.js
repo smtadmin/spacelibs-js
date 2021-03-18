@@ -6,8 +6,8 @@
  * File Created: Monday, 18th January 2021 3:42 pm
  * Author: Justin Jeffrey (justin.jeffrey@siliconmtn.com)
  * -----
- * Last Modified: Tuesday, 2nd February 2021 2:39 pm
- * Modified By: tyler Gaffaney (tyler.gaffaney@siliconmtn.com>)
+ * Last Modified: Thursday, 25th February 2021 4:09 pm
+ * Modified By: Justin Jeffrey (justin.jeffrey@siliconmtn.com>)
  * -----
  * Copyright 2021, Silicon Mountain Technologies, Inc.
  */
@@ -202,7 +202,7 @@ it("Makes a uploadFile request without crashing", () => {
    * @param {object} error - Error object returned from BaseHTTPService
    */
   function onFailure(error) {
-    console.log(error);
+    console.error(error);
   }
 
 });
