@@ -10,8 +10,8 @@
  * File Created: Monday, 18th January 2021 3:42 pm
  * Author: Tyler Gaffaney (tyler.gaffaney@siliconmtn.com)
  * -----
- * Last Modified: Monday, 15th March 2021 4:56 pm
- * Modified By: Justin Jeffrey (justin.jeffrey@siliconmtn.com>)
+ * Last Modified: Tuesday, 29th June 2021 10:07 am
+ * Modified By: tyler Gaffaney (tyler.gaffaney@siliconmtn.com>)
  * -----
  * Copyright 2021, Silicon Mountain Technologies, Inc.
  */
@@ -85,7 +85,7 @@ class BaseHTTPService {
 	 * @memberof BaseHTTPService
 	 */
 	update(url, data, params, onComplete, options = {}) {
-		this.request(HTTPMethod.PATCH, url, data, params, onComplete, undefined, options);
+		this.request(HTTPMethod.PUT, url, data, params, onComplete, undefined, options);
 	}
 
 	/**
@@ -147,11 +147,17 @@ class BaseHTTPService {
 			cancelToken: cancelTokenSource.token
 		};
 
+		if(requestConfig.headers == null || requestConfig.headers["Content-Type"] == null)
+			requestConfig.headers = {
+				"Content-Type": "application/json"
+			};
+
 		this.axiosInstance.request(requestConfig).then((response) => {
 			// Transform it from an Axios response to whatever
 			onComplete(this.tranformSuccess(response));
 		}).catch((error) => {
 			// Transfrom from Axios Error to whatever
+			console.error(error);
 			onComplete(this.transformError(error));
 		});
 
@@ -166,10 +172,9 @@ class BaseHTTPService {
 	 * @memberof BaseHTTPService
 	 */
 	tranformSuccess(response) {
-		return {
-			isValid: true,
-			data: response.data.data
-		};
+		let responseObject = {...response.data};
+		responseObject.isValid = true;
+		return responseObject;
 	}
 
 	/**
@@ -180,10 +185,10 @@ class BaseHTTPService {
 	 * @memberof BaseHTTPService
 	 */
 	transformError(error) {
-		return {
-			isValid: false,
-			data: null
-		};
+		let errorObject = {...error.response?.data};
+		errorObject.isValid = false;
+		errorObject.data = undefined;
+		return errorObject;
 	}
 }
 
