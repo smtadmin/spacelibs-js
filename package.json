@@ -1,6 +1,6 @@
 {
   "name": "@siliconmtn/spacelibs-js",
-  "version": "0.0.18",
+  "version": "0.0.20",
   "description": "spacelibs-js package",
   "main": "./core/index.js",
   "module": "./src/core/index.js",
@@ -63,6 +63,7 @@
   },
   "dependencies": {
     "axios": "^0.21.1",
+    "babel-preset-react-app": "^10.0.1",
     "pulsar-client": "^1.6.2"
   }
 }
