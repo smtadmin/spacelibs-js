@@ -36,7 +36,7 @@ class Consumer {
   async connect() {
 
     // Create a Pulsar client
-    return new Client({
+    this.client = new Client({
       serviceUrl: this.settings.path
     });
   }
@@ -47,23 +47,35 @@ class Consumer {
    * @param {string} subscription Message to be placed onto the topic/queue
    * @param {function} listener Function to call when a message is received
    */
-  async sendMessage(topic, subscription, listener) {
+  async listen(topic, subscription, listener) {
     // Create a producer
-    let client = await this.connect();
+    await this.connect();
 
-    // Create a consumer
-    const consumer = await client.subscribe({
-        topic: topic,
-        subscription: subscription,
-        subscriptionType: 'Exclusive',
-        listener: listener,
-    });
+    try {
 
-    // Buffer and close te connection
-    await consumer.close();
-    await client.close();
+      // Create a consumer
+      this.consumer = await this.client.subscribe({
+          topic: topic,
+          subscription: subscription,
+          subscriptionType: 'Exclusive',
+          listener: listener,
+      });
+    } catch(ex) {
+      console.log("Error", ex);
+    }
   }
 
+  async disconnect(closeClient) {
+    try {
+      // Buffer and close te connection
+      await this.consumer.close();
+      if(closeClient) {
+        this.client.close();
+      }
+    } catch(ex) {
+      console.log("Error", ex);
+    }
+  }
 }
 
 export default Consumer;
