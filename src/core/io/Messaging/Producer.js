@@ -51,13 +51,12 @@ class Producer {
     let client = await this.connect();
 
     try {
-      console.log("Got a MESSAGE request for the human feedback", message);
       const producer = await client.createProducer({
         topic: topic
       });
 
       // Send messages
-      producer.send({ data: Buffer.from(JSON.stringify(message)) });
+      await producer.send({ data: Buffer.from(JSON.stringify(message)) });
 
       // Buffer and close the connection
       await producer.flush();
