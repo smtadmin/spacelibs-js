@@ -13,20 +13,17 @@
  */
 
 // Imports for this class
-import { Client } from "pulsar-client";
+import { Client, AuthenticationToken } from "pulsar-client";
 
 /**
  * Producer Class
  */
 class Producer {
-  /**
-   * Initializes the Producer with the host and port supplied
-   * @param {object} config Configuration for this app.  Must include the 
-   * host param (URL of the pulsar server) and the port of the server
-   */
   constructor(config) {
     this.settings = config;
-    this.settings.path = this.settings.host + ":" + this.settings.port;
+    if(this.settings.host !== undefined && this.settings.port !== undefined) {
+      this.settings.path = this.settings.host + ":" + this.settings.port;
+    }
   }
 
   /**
@@ -34,11 +31,17 @@ class Producer {
    * @returns {object} New Pulsar Client
    */
   async connect() {
-
     // Create a Pulsar client
-    return new Client({
-      serviceUrl: this.settings.path
-    });
+    if(this.settings.jwtToken !== undefined) {
+      return new Client({
+        serviceUrl: this.settings.path,
+        authentication: new AuthenticationToken({"token": this.settings.jwtToken})
+      });
+    } else {
+      return new Client({
+        serviceUrl: this.settings.path
+      });
+    }
   }
 
   /**
@@ -46,22 +49,25 @@ class Producer {
    * @param {string} topic pulsar topic to connect.  Ex: persistent://public/default/my-topic
    * @param {object} message Message to be placed onto the topic/queue
    */
-  async sendMessage(topic, message) {
+  async sendMessage(topic, message, props = {}) {
     // Create a producer
     let client = await this.connect();
 
     try {
       const producer = await client.createProducer({
-        topic: topic
+        topic: topic,
+        properties: props
       });
 
       // Send messages
-      await producer.send({ data: Buffer.from(JSON.stringify(message)) });
+      let id = await producer.send({ data: Buffer.from(JSON.stringify(message)), properties: props });
 
       // Buffer and close the connection
       await producer.flush();
       await producer.close();
       await client.close();
+
+      return id;
     } catch (ex) {
       console.log("Error", ex);
     }
