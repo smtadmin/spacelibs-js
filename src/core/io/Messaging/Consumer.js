@@ -13,7 +13,7 @@
  */
 
 // Imports for this class
-import { Client } from "pulsar-client";
+import { Client, AuthenticationToken } from "pulsar-client";
 
 /**
  * Pulsar Message consumer
@@ -24,9 +24,11 @@ class Consumer {
    * @param {object} config Configuration for this app.  Must include the 
    * host param (URL of the pulsar server) and the port of the server
    */
-  constructor(config) {
+   constructor(config) {
     this.settings = config;
-    this.settings.path = this.settings.host + ":" + this.settings.port;
+    if(this.settings.host !== undefined && this.settings.port !== undefined) {
+      this.settings.path = this.settings.host + ":" + this.settings.port;
+    }
   }
 
   /**
@@ -36,9 +38,16 @@ class Consumer {
   async connect() {
 
     // Create a Pulsar client
-    this.client = new Client({
-      serviceUrl: this.settings.path
-    });
+    if(this.settings.jwtToken) {
+      this.client = new Client({
+        serviceUrl: this.settings.path,
+        authentication: new AuthenticationToken({"token": this.settings.jwtToken})
+      });
+    } else {
+      this.client = new Client({
+        serviceUrl: this.settings.path
+      });
+    }
   }
 
   /**
@@ -69,8 +78,10 @@ class Consumer {
     try {
       // Buffer and close te connection
       await this.consumer.close();
+      this.consumer = null;
       if(closeClient) {
         this.client.close();
+        this.client = null;
       }
     } catch(ex) {
       console.log("Error", ex);
