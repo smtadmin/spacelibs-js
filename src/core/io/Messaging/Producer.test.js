@@ -62,3 +62,15 @@ jest.mock('pulsar-client');
 
     expect(id).toBeTruthy();
   });
+
+  it("Produce Message Properly No Props", async () => {
+    let config = {};
+    config.path = "pulsar://localhost:1000";
+    config.jwtToken = "1234abcd";
+
+    let p = new Producer(config);
+
+    const id = await p.sendMessage("destTopic", "Hello World");
+
+    expect(id).toBeTruthy();
+  });
