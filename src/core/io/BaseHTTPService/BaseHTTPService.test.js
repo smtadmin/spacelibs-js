@@ -14,7 +14,6 @@
 
 import BaseHTTPService from './BaseHTTPService';
 
-
 /**
  * Default settings for Generic HTTPService 
  * @type {object}  
@@ -45,12 +44,47 @@ it("Makes a read request without crashing", async () => {
   }
 
 });
+
+/**
+ * Attempts to make a read request and asserts that the returned data.message is equal to "The request was successful"
+ */
+ it("Makes a read request without crashing no options", async () => {
+  service.read(null, null, onSuccess);
+
+  /**
+   * Callback function to test the response of the api call
+   *
+   * @param {object} response - Response object returned from BaseHTTPService
+   */
+  function onSuccess(response) {
+    expect(response.data.success).toBe(true);
+    expect(response.data.message).toBe("The request was successful");
+  }
+
+});
  
 /**
  * Attempts to make a insert request and asserts that the returned data.message is equal to "The request was successful"
  */
 it("Makes a insert request without crashing", () => {
-  service.insert(null, null, onSuccess, null);
+  service.insert(null, null, null, onSuccess, null);
+  
+  /**
+   * Callback function to test the response of the api call
+   *
+   * @param {object} response - Response object returned from BaseHTTPService
+   */
+  function onSuccess(response) {
+    expect(response.data.success).toBe(true);
+    expect(response.data.message).toBe("The request was successful");
+  }
+});
+
+/**
+ * Attempts to make a insert request and asserts that the returned data.message is equal to "The request was successful"
+ */
+ it("Makes a insert request with no options without crashing", () => {
+  service.insert(null, null, null, onSuccess);
   
   /**
    * Callback function to test the response of the api call
@@ -67,7 +101,24 @@ it("Makes a insert request without crashing", () => {
  * Attempts to make a update request and asserts that the returned data.message is equal to "The request was successful"
  */
 it("Makes a update request without crashing", () => {
-  service.update(null, null, onSuccess, null);
+  service.update(null, null, null, onSuccess, null);
+
+  /**
+   * Callback function to test the response of the api call
+   *
+   * @param {object} response - Response object returned from BaseHTTPService
+   */
+  function onSuccess(response) {
+    expect(response.data.success).toBe(true);
+    expect(response.data.message).toBe("The request was successful");
+  }
+});
+
+/**
+ * Attempts to make a update request and asserts that the returned data.message is equal to "The request was successful"
+ */
+ it("Makes a update request with no options without crashing", () => {
+  service.update(null, null, null, onSuccess);
 
   /**
    * Callback function to test the response of the api call
@@ -84,7 +135,24 @@ it("Makes a update request without crashing", () => {
  * Attempts to make a delete request and asserts that the returned data.message is equal to "The request was successful"
  */
 it("Makes a delete request without crashing", () => {
-  service.delete(null, null, onSuccess, null);
+  service.delete(null, null, null, onSuccess, null);
+
+  /**
+   * Callback function to test the response of the api call
+   *
+   * @param {object} response - Response object returned from BaseHTTPService
+   */
+  function onSuccess(response) {
+    expect(response.data.success).toBe(true);
+    expect(response.data.message).toBe("The request was successful");
+  }
+});
+
+/**
+ * Attempts to make a delete request and asserts that the returned data.message is equal to "The request was successful"
+ */
+ it("Makes a delete request with no options without crashing", () => {
+  service.delete(null, null, null, onSuccess);
 
   /**
    * Callback function to test the response of the api call
@@ -101,7 +169,7 @@ it("Makes a delete request without crashing", () => {
  * Attempts to make a standard request and asserts that the returned data.message is equal to "The request was successful"
  */
 it("Makes a standard request without crashing", () => {
-  service.request("GET", null, null, onSuccess, null, null, {});
+  service.request("GET", null, null, null, onSuccess, null, {});
 
   /**
    * Callback function to test the response of the api call
@@ -123,7 +191,7 @@ it("Gets a warning if the method is undefined", () => {
     .spyOn(console, 'error')
     .mockImplementation(() => { });
 
-  service.request("FlufferNutter", null, null, null, null, null, {});
+  service.request(null, null, null, null, null, null, {});
   expect(errorEvent).toHaveBeenCalled();
 
 });
@@ -137,7 +205,7 @@ it("Validates option validation is working", async () => {
     .spyOn(console, 'warn')
     .mockImplementation(() => { });
 
-  service.request("GET", null, null, onSuccess, null, null);
+  service.request("GET", null, null, null, null, onSuccess, null);
   expect(warnEvent).toHaveBeenCalled();
 
   /**
@@ -161,7 +229,7 @@ it("Validates headers are added properly", async () => {
     headers: "Test-Header"
   };
 
-  service.request("GET", null, null, onSuccess, null, null, options);
+  service.request("GET", null, null, null, null, onSuccess, null, options);
 
   /**
    * Callback function to test the response of the api call
@@ -182,7 +250,7 @@ it("Validates headers are added properly", async () => {
  */
 it("Makes a uploadFile request without crashing", () => {
 	
-  service.uploadFile(null, "test", onSuccess, onFailure, null, undefined);
+  service.uploadFile(null, "test", onSuccess, onFailure);
 
   /**
    * Callback function to test the response of the api call
@@ -227,7 +295,7 @@ it("onFailure returns when the request fails", () => {
    * @param {object} error - Error object returned from BaseHTTPService
    */
   function onFailure(error) {
-    expect(error).toBe("BOOM");
+    expect(error.isValid).toBe(false);
   }
 
 });

@@ -137,6 +137,12 @@ class BaseHTTPService {
 		 */
 		const cancelTokenSource = axios.CancelToken.source();
 
+		if(!method) {
+			console.error("No method specified.");
+		}
+		if(!options) {
+			console.warn("Options not passed");
+		}
 		let requestConfig = {
 			url: url,
 			method: HTTPMethod[method],
@@ -154,11 +160,15 @@ class BaseHTTPService {
 
 		this.axiosInstance.request(requestConfig).then((response) => {
 			// Transform it from an Axios response to whatever
-			onComplete(this.tranformSuccess(response));
+			if(onComplete) {
+				onComplete(this.tranformSuccess(response));
+			}
 		}).catch((error) => {
 			// Transfrom from Axios Error to whatever
 			console.error(error);
-			onComplete(this.transformError(error));
+			if(onComplete) {
+				onComplete(this.transformError(error));
+			}
 		});
 
 		return cancelTokenSource;
@@ -172,7 +182,7 @@ class BaseHTTPService {
 	 * @memberof BaseHTTPService
 	 */
 	tranformSuccess(response) {
-		let responseObject = {...response.data};
+		let responseObject = {...response};
 		responseObject.isValid = true;
 		return responseObject;
 	}
@@ -185,7 +195,7 @@ class BaseHTTPService {
 	 * @memberof BaseHTTPService
 	 */
 	transformError(error) {
-		let errorObject = {...error.response?.data};
+		let errorObject = {...error.response};
 		errorObject.isValid = false;
 		errorObject.data = undefined;
 		return errorObject;
