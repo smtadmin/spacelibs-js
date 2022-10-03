@@ -19,10 +19,13 @@ import { Client, AuthenticationToken } from "pulsar-client";
  * Producer Class
  */
 class Producer {
-  constructor(config) {
+  constructor(config = {}) {
     this.settings = config;
     if(this.settings.host !== undefined && this.settings.port !== undefined) {
       this.settings.path = this.settings.host + ":" + this.settings.port;
+    }
+    if(!this.settings.hasOwnProperty("tlsAllowsInsecureConnection")) {
+      this.settings.tlsAllowsInsecureConnection = false;
     }
   }
 
@@ -35,7 +38,8 @@ class Producer {
     if(this.settings.jwtToken !== undefined) {
       return new Client({
         serviceUrl: this.settings.path,
-        authentication: new AuthenticationToken({"token": this.settings.jwtToken})
+        authentication: new AuthenticationToken({"token": this.settings.jwtToken}),
+        tlsAllowInsecureConnection: this.settings.tlsAllowsInsecureConnection
       });
     } else {
       return new Client({
@@ -69,7 +73,7 @@ class Producer {
 
       return id;
     } catch (ex) {
-      console.log("Error", ex);
+      console.error("Error", ex);
     }
   }
 }
