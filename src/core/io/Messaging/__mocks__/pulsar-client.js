@@ -17,11 +17,21 @@ module.exports = {
         if (config) {
             return {
                 subscribe: jest.fn((subConfig) => {
-                    return {close: jest.fn()}
+                    if(subConfig.topic === "BOOM") {
+                        return {close: () => {throw new Error("Boom");}}
+                    } else if (subConfig.topic === "BUST") {
+                        throw new Error("BUST");
+                    } else {
+                        return {close: jest.fn()}
+                    }
                 }),
                 close: jest.fn(),
                 createProducer: jest.fn((pConfig) => {
-                    return {close: jest.fn(), send: jest.fn((data) => { return "mId"}), flush: jest.fn()}
+                    if(pConfig.topic === "BOOM") {
+                        return {close: () => {throw new Error("BOOM");}, send: jest.fn((data) => { return "mId"}), flush: jest.fn()}
+                    } else {
+                        return {close: jest.fn(), send: jest.fn((data) => { return "mId"}), flush: jest.fn()}
+                    }
                 })
             };
         }

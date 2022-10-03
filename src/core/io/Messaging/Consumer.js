@@ -24,10 +24,13 @@ class Consumer {
    * @param {object} config Configuration for this app.  Must include the 
    * host param (URL of the pulsar server) and the port of the server
    */
-   constructor(config) {
+   constructor(config = {}) {
     this.settings = config;
     if(this.settings.host !== undefined && this.settings.port !== undefined) {
       this.settings.path = this.settings.host + ":" + this.settings.port;
+    }
+    if(!this.settings.hasOwnProperty("tlsAllowsInsecureConnection")) {
+      this.settings.tlsAllowsInsecureConnection = false;
     }
   }
 
@@ -41,7 +44,8 @@ class Consumer {
     if(this.settings.jwtToken) {
       this.client = new Client({
         serviceUrl: this.settings.path,
-        authentication: new AuthenticationToken({"token": this.settings.jwtToken})
+        authentication: new AuthenticationToken({"token": this.settings.jwtToken}),
+        tlsAllowInsecureConnection: this.settings.tlsAllowsInsecureConnection
       });
     } else {
       this.client = new Client({
@@ -67,10 +71,10 @@ class Consumer {
           topic: topic,
           subscription: subscription,
           subscriptionType: 'Exclusive',
-          listener: listener,
+          listener: listener
       });
     } catch(ex) {
-      console.log("Error", ex);
+      console.error("Error", ex);
     }
   }
 
@@ -84,7 +88,7 @@ class Consumer {
         this.client = null;
       }
     } catch(ex) {
-      console.log("Error", ex);
+      console.error("Error", ex);
     }
   }
 }

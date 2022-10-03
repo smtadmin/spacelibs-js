@@ -10,24 +10,28 @@ jest.mock('pulsar-client');
     let config = {};
     config.host = "pulsar://localhost";
     config.port = 1000;
+    config.tlsAllowsInsecureConnection = false;
 
     let consumer = new Consumer(config);
 
     expect(consumer.settings.host).toBe(config.host);
     expect(consumer.settings.port).toBe(config.port);
-    expect(consumer.settings.path).toBe(config.host + ":" + config.port);  
+    expect(consumer.settings.path).toBe(config.host + ":" + config.port);
+    expect(p.settings.tlsAllowsInsecureConnection).toBe(config.tlsAllowsInsecureConnection);
   });
 
   it("Configures a Consumer properly", async () => {
     let config = {};
     config.path = "pulsar://localhost:1000";
     config.jwtToken = "1234abcd";
+    config.tlsAllowsInsecureConnection = true;
 
 
     let consumer = new Consumer(config);
 
     expect(consumer.settings.path).toBe(config.path);
     expect(consumer.settings.jwtToken).toBe(config.jwtToken);
+    expect(p.settings.tlsAllowsInsecureConnection).toBe(config.tlsAllowsInsecureConnection);
   });
 
 
@@ -68,6 +72,20 @@ jest.mock('pulsar-client');
     expect(consumer.consumer).toBeTruthy();
   });
 
+  it("Subscripe Fails Properly", async () => {
+    let config = {};
+    config.path = "pulsar://localhost:1000";
+    config.jwtToken = "1234abcd";
+
+
+    let consumer = new Consumer(config);
+
+    await consumer.listen("BUST");
+
+    expect(consumer.client).toBeTruthy();
+    expect(consumer.consumer).toBeTruthy();
+  });
+
   it("Closes just the subscriber", async () => {
     let config = {};
     config.path = "pulsar://localhost:1000";
@@ -98,4 +116,16 @@ jest.mock('pulsar-client');
 
     expect(consumer.client).toBeFalsy();
     expect(consumer.consumer).toBeFalsy();
+  });
+
+  it("Disconnect Handle Error Properly", async () => {
+    let consumer = new Consumer();
+
+    const errorEvent = jest.spyOn(console, 'error');
+
+    await consumer.listen("BOOM", "Hello World");
+
+    await consumer.disconnect(true);
+
+    expect(errorEvent).toHaveBeenCalled();
   });
