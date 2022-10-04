@@ -1,6 +1,6 @@
 {
   "name": "@siliconmtn/spacelibs-js",
-  "version": "0.0.23",
+  "version": "0.0.24",
   "description": "spacelibs-js package",
   "main": "./core/index.js",
   "module": "./src/core/index.js",
