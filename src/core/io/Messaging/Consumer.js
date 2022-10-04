@@ -27,11 +27,15 @@ class Consumer {
    constructor(config = {}) {
     this.settings = config;
     if(this.settings.host !== undefined && this.settings.port !== undefined) {
+      console.log("Building Path");
       this.settings.path = this.settings.host + ":" + this.settings.port;
     }
     if(!this.settings.hasOwnProperty("tlsAllowsInsecureConnection")) {
+      console.log("Populating Missing TLS AllowInsecureConnection FALSE");
       this.settings.tlsAllowsInsecureConnection = false;
     }
+
+    console.log("Settings Generated: ", this.settings);
   }
 
   /**
@@ -42,12 +46,14 @@ class Consumer {
 
     // Create a Pulsar client
     if(this.settings.jwtToken) {
+      console.log("Generating JWT Token Auth Client");
       this.client = new Client({
         serviceUrl: this.settings.path,
         authentication: new AuthenticationToken({"token": this.settings.jwtToken}),
         tlsAllowInsecureConnection: this.settings.tlsAllowsInsecureConnection
       });
     } else {
+      console.log("Generating No Auth Client");
       this.client = new Client({
         serviceUrl: this.settings.path
       });

@@ -17,7 +17,7 @@ jest.mock('pulsar-client');
     expect(consumer.settings.host).toBe(config.host);
     expect(consumer.settings.port).toBe(config.port);
     expect(consumer.settings.path).toBe(config.host + ":" + config.port);
-    expect(p.settings.tlsAllowsInsecureConnection).toBe(config.tlsAllowsInsecureConnection);
+    expect(consumer.settings.tlsAllowsInsecureConnection).toBe(config.tlsAllowsInsecureConnection);
   });
 
   it("Configures a Consumer properly", async () => {
@@ -31,7 +31,7 @@ jest.mock('pulsar-client');
 
     expect(consumer.settings.path).toBe(config.path);
     expect(consumer.settings.jwtToken).toBe(config.jwtToken);
-    expect(p.settings.tlsAllowsInsecureConnection).toBe(config.tlsAllowsInsecureConnection);
+    expect(consumer.settings.tlsAllowsInsecureConnection).toBe(config.tlsAllowsInsecureConnection);
   });
 
 
@@ -72,7 +72,7 @@ jest.mock('pulsar-client');
     expect(consumer.consumer).toBeTruthy();
   });
 
-  it("Subscripe Fails Properly", async () => {
+  it("Subscribe Fails Properly", async () => {
     let config = {};
     config.path = "pulsar://localhost:1000";
     config.jwtToken = "1234abcd";
@@ -83,7 +83,7 @@ jest.mock('pulsar-client');
     await consumer.listen("BUST");
 
     expect(consumer.client).toBeTruthy();
-    expect(consumer.consumer).toBeTruthy();
+    expect(consumer.consumer).toBeFalsy();
   });
 
   it("Closes just the subscriber", async () => {
