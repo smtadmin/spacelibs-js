@@ -10,28 +10,28 @@ jest.mock('pulsar-client');
     let config = {};
     config.host = "pulsar://localhost";
     config.port = 1000;
-    config.tlsAllowsInsecureConnection = false;
+    config.tlsAllowInsecureConnection = false;
 
     let consumer = new Consumer(config);
 
     expect(consumer.settings.host).toBe(config.host);
     expect(consumer.settings.port).toBe(config.port);
     expect(consumer.settings.path).toBe(config.host + ":" + config.port);
-    expect(consumer.settings.tlsAllowsInsecureConnection).toBe(config.tlsAllowsInsecureConnection);
+    expect(consumer.settings.tlsAllowInsecureConnection).toBe(config.tlsAllowInsecureConnection);
   });
 
   it("Configures a Consumer properly", async () => {
     let config = {};
     config.path = "pulsar://localhost:1000";
     config.jwtToken = "1234abcd";
-    config.tlsAllowsInsecureConnection = true;
+    config.tlsAllowInsecureConnection = true;
 
 
     let consumer = new Consumer(config);
 
     expect(consumer.settings.path).toBe(config.path);
     expect(consumer.settings.jwtToken).toBe(config.jwtToken);
-    expect(consumer.settings.tlsAllowsInsecureConnection).toBe(config.tlsAllowsInsecureConnection);
+    expect(consumer.settings.tlsAllowInsecureConnection).toBe(config.tlsAllowInsecureConnection);
   });
 
 
@@ -128,4 +128,81 @@ jest.mock('pulsar-client');
     await consumer.disconnect(true);
 
     expect(errorEvent).toHaveBeenCalled();
+  });
+
+  it("tlsAllowInsecureConnection bool true", async () => {
+    let config = {};
+    config.host = "pulsar://localhost";
+    config.port = 1000;
+    config.tlsAllowInsecureConnection = true;
+
+    let consumer = new Consumer(config);
+
+    expect(consumer.isTLSAllowInsecureConnection()).toBe(true);
+  });
+
+  it("tlsAllowInsecureConnection string true", async () => {
+    let config = {};
+    config.host = "pulsar://localhost";
+    config.port = 1000;
+    config.tlsAllowInsecureConnection = "true";
+
+    let consumer = new Consumer(config);
+
+    expect(consumer.isTLSAllowInsecureConnection()).toBe(true);
+  });
+
+  it("tlsAllowInsecureConnection bool false", async () => {
+    let config = {};
+    config.host = "pulsar://localhost";
+    config.port = 1000;
+    config.tlsAllowInsecureConnection = false;
+
+    let consumer = new Consumer(config);
+
+    expect(consumer.isTLSAllowInsecureConnection()).toBe(false);
+  });
+
+  it("tlsAllowInsecureConnection string false", async () => {
+    let config = {};
+    config.host = "pulsar://localhost";
+    config.port = 1000;
+    config.tlsAllowInsecureConnection = "false";
+
+    let consumer = new Consumer(config);
+
+    expect(consumer.isTLSAllowInsecureConnection()).toBe(false);
+  });
+
+  it("tlsAllowInsecureConnection null", async () => {
+    let config = {};
+    config.host = "pulsar://localhost";
+    config.port = 1000;
+    config.tlsAllowInsecureConnection = null;
+
+    let consumer = new Consumer(config);
+
+    expect(consumer.isTLSAllowInsecureConnection()).toBe(false);
+  });
+
+  it("tlsAllowInsecureConnection 0", async () => {
+    let config = {};
+    config.host = "pulsar://localhost";
+    config.port = 1000;
+    config.tlsAllowInsecureConnection = 0;
+
+    let consumer = new Consumer(config);
+
+    expect(consumer.isTLSAllowInsecureConnection()).toBe(false);
+  });
+
+  it("tlsAllowInsecureConnection 1", async () => {
+    let config = {};
+    config.host = "pulsar://localhost";
+    config.port = 1000;
+    config.tlsAllowInsecureConnection = 1;
+
+    let consumer = new Consumer(config);
+
+    expect(consumer.isTLSAllowInsecureConnection()).toBe(false);
   });

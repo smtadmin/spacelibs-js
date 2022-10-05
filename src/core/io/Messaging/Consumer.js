@@ -13,51 +13,19 @@
  */
 
 // Imports for this class
-import { Client, AuthenticationToken } from "pulsar-client";
+import PulsarClient from "./PulsarClient";
 
 /**
  * Pulsar Message consumer
  */
-class Consumer {
+class Consumer extends PulsarClient {
   /**
    * Constructs the consumer with the appropriate host and port
    * @param {object} config Configuration for this app.  Must include the 
    * host param (URL of the pulsar server) and the port of the server
    */
    constructor(config = {}) {
-    this.settings = config;
-    if(this.settings.host !== undefined && this.settings.port !== undefined) {
-      console.log("Building Path");
-      this.settings.path = this.settings.host + ":" + this.settings.port;
-    }
-    if(!this.settings.hasOwnProperty("tlsAllowsInsecureConnection")) {
-      console.log("Populating Missing TLS AllowInsecureConnection FALSE");
-      this.settings.tlsAllowsInsecureConnection = false;
-    }
-
-    console.log("Settings Generated: ", this.settings);
-  }
-
-  /**
-   * Connects to the Pulsar server and returns a client
-   * @returns New Pulsar Client
-   */
-  async connect() {
-
-    // Create a Pulsar client
-    if(this.settings.jwtToken) {
-      console.log("Generating JWT Token Auth Client");
-      this.client = new Client({
-        serviceUrl: this.settings.path,
-        authentication: new AuthenticationToken({"token": this.settings.jwtToken}),
-        tlsAllowInsecureConnection: this.settings.tlsAllowsInsecureConnection
-      });
-    } else {
-      console.log("Generating No Auth Client");
-      this.client = new Client({
-        serviceUrl: this.settings.path
-      });
-    }
+    super(config);
   }
 
   /**
@@ -68,7 +36,7 @@ class Consumer {
    */
   async listen(topic, subscription, listener) {
     // Create a producer
-    await this.connect();
+    await super.connect();
 
     try {
 

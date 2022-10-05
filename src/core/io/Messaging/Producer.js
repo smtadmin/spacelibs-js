@@ -13,44 +13,15 @@
  */
 
 // Imports for this class
-import { Client, AuthenticationToken } from "pulsar-client";
+import PulsarClient from "./PulsarClient";
 
 /**
  * Producer Class
  */
-class Producer {
+class Producer extends PulsarClient {
+  
   constructor(config = {}) {
-    this.settings = config;
-    if(this.settings.host !== undefined && this.settings.port !== undefined) {
-      console.log("Building Path");
-      this.settings.path = this.settings.host + ":" + this.settings.port;
-    }
-    if(!this.settings.hasOwnProperty("tlsAllowsInsecureConnection")) {
-      console.log("Populating Missing TLS AllowInsecureConnection FALSE");
-      this.settings.tlsAllowsInsecureConnection = false;
-    }
-    console.log("Settings Generated: ", this.settings);
-  }
-
-  /**
-   * Connects to the Pulsar server and returns a client
-   * @returns {object} New Pulsar Client
-   */
-  async connect() {
-    // Create a Pulsar client
-    if(this.settings.jwtToken !== undefined) {
-      console.log("Generating JWT Token Auth Client");
-      return new Client({
-        serviceUrl: this.settings.path,
-        authentication: new AuthenticationToken({"token": this.settings.jwtToken}),
-        tlsAllowInsecureConnection: this.settings.tlsAllowsInsecureConnection
-      });
-    } else {
-      console.log("Generating No Auth Client");
-      return new Client({
-        serviceUrl: this.settings.path
-      });
-    }
+    super(config);
   }
 
   /**
@@ -60,10 +31,10 @@ class Producer {
    */
   async sendMessage(topic, message, props = {}) {
     // Create a producer
-    let client = await this.connect();
+    await super.connect();
 
     try {
-      const producer = await client.createProducer({
+      const producer = await this.client.createProducer({
         topic: topic,
         properties: props
       });
@@ -74,7 +45,7 @@ class Producer {
       // Buffer and close the connection
       await producer.flush();
       await producer.close();
-      await client.close();
+      await this.client.close();
 
       return id;
     } catch (ex) {
