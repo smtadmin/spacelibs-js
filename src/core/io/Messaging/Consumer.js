@@ -13,12 +13,12 @@
  */
 
 // Imports for this class
-import PulsarClient from "./PulsarClient";
+import BasePulsarClient from "./BasePulsarClient";
 
 /**
  * Pulsar Message consumer
  */
-class Consumer extends PulsarClient {
+class Consumer extends BasePulsarClient {
   /**
    * Constructs the consumer with the appropriate host and port
    * @param {object} config Configuration for this app.  Must include the 

@@ -13,12 +13,12 @@
  */
 
 // Imports for this class
-import PulsarClient from "./PulsarClient";
+import BasePulsarClient from "./BasePulsarClient";
 
 /**
  * Producer Class
  */
-class Producer extends PulsarClient {
+class Producer extends BasePulsarClient {
   
   constructor(config = {}) {
     super(config);

@@ -18,7 +18,7 @@ import { Client, AuthenticationToken } from "pulsar-client";
 /**
  * Pulsar Message consumer
  */
-class PulsarClient {
+class BasePulsarClient {
   /**
    * Constructs the consumer with the appropriate host and port
    * @param {object} config Configuration for this app.  Must include the 
@@ -66,4 +66,4 @@ class PulsarClient {
   }
 }
 
-export default PulsarClient;
+export default BasePulsarClient;

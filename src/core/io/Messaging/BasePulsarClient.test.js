@@ -1,9 +1,9 @@
-import PulsarClient from './PulsarClient';
+import BasePulsarClient from './BasePulsarClient';
 
 jest.mock('pulsar-client');
 
 it("Doesn't Error on empty config", async () => {
-    let p = new PulsarClient();
+    let p = new BasePulsarClient();
 
     expect(p).toBeTruthy();
 });
@@ -17,7 +17,7 @@ it("Doesn't Error on empty config", async () => {
     config.port = 1000;
     config.tlsAllowInsecureConnection = false;
 
-    let pulsarClient = new PulsarClient(config);
+    let pulsarClient = new BasePulsarClient(config);
 
     expect(pulsarClient.settings.host).toBe(config.host);
     expect(pulsarClient.settings.port).toBe(config.port);
@@ -32,7 +32,7 @@ it("Doesn't Error on empty config", async () => {
     config.tlsAllowInsecureConnection = true;
 
 
-    let pulsarClient = new PulsarClient(config);
+    let pulsarClient = new BasePulsarClient(config);
 
     expect(pulsarClient.settings.path).toBe(config.path);
     expect(pulsarClient.settings.jwtToken).toBe(config.jwtToken);
@@ -46,7 +46,7 @@ it("Doesn't Error on empty config", async () => {
     config.jwtToken = "1234abcd";
 
 
-    let pulsarClient = new PulsarClient(config);
+    let pulsarClient = new BasePulsarClient(config);
 
     await pulsarClient.connect();
     expect(pulsarClient.client).toBeTruthy();
@@ -57,7 +57,7 @@ it("Doesn't Error on empty config", async () => {
     config.path = "pulsar://localhost:1000";
 
 
-    let pulsarClient = new PulsarClient(config);
+    let pulsarClient = new BasePulsarClient(config);
 
     await pulsarClient.connect();
     expect(pulsarClient.client).toBeTruthy();
@@ -70,7 +70,7 @@ it("Doesn't Error on empty config", async () => {
     config.port = 1000;
     config.tlsAllowInsecureConnection = true;
 
-    let pulsarClient = new PulsarClient(config);
+    let pulsarClient = new BasePulsarClient(config);
 
     expect(pulsarClient.isTLSAllowInsecureConnection()).toBe(true);
   });
@@ -81,7 +81,7 @@ it("Doesn't Error on empty config", async () => {
     config.port = 1000;
     config.tlsAllowInsecureConnection = "true";
 
-    let pulsarClient = new PulsarClient(config);
+    let pulsarClient = new BasePulsarClient(config);
 
     expect(pulsarClient.isTLSAllowInsecureConnection()).toBe(true);
   });
@@ -92,7 +92,7 @@ it("Doesn't Error on empty config", async () => {
     config.port = 1000;
     config.tlsAllowInsecureConnection = false;
 
-    let pulsarClient = new PulsarClient(config);
+    let pulsarClient = new BasePulsarClient(config);
 
     expect(pulsarClient.isTLSAllowInsecureConnection()).toBe(false);
   });
@@ -103,7 +103,7 @@ it("Doesn't Error on empty config", async () => {
     config.port = 1000;
     config.tlsAllowInsecureConnection = "false";
 
-    let pulsarClient = new PulsarClient(config);
+    let pulsarClient = new BasePulsarClient(config);
 
     expect(pulsarClient.isTLSAllowInsecureConnection()).toBe(false);
   });
@@ -114,7 +114,7 @@ it("Doesn't Error on empty config", async () => {
     config.port = 1000;
     config.tlsAllowInsecureConnection = null;
 
-    let pulsarClient = new PulsarClient(config);
+    let pulsarClient = new BasePulsarClient(config);
 
     expect(pulsarClient.isTLSAllowInsecureConnection()).toBe(false);
   });
@@ -125,7 +125,7 @@ it("Doesn't Error on empty config", async () => {
     config.port = 1000;
     config.tlsAllowInsecureConnection = 0;
 
-    let pulsarClient = new PulsarClient(config);
+    let pulsarClient = new BasePulsarClient(config);
 
     expect(pulsarClient.isTLSAllowInsecureConnection()).toBe(false);
   });
@@ -136,7 +136,7 @@ it("Doesn't Error on empty config", async () => {
     config.port = 1000;
     config.tlsAllowInsecureConnection = 1;
 
-    let pulsarClient = new PulsarClient(config);
+    let pulsarClient = new BasePulsarClient(config);
 
     expect(pulsarClient.isTLSAllowInsecureConnection()).toBe(false);
   });
