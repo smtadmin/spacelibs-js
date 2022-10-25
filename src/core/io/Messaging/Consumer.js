@@ -35,10 +35,10 @@ class Consumer extends BasePulsarClient {
    * @param {function} listener Function to call when a message is received
    */
   async listen(topic, subscription, listener) {
-    // Create a producer
-    await super.connect();
-
     try {
+
+      // Create a client
+      await super.connect();
 
       // Create a consumer
       this.consumer = await this.client.subscribe({

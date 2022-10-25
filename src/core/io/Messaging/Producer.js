@@ -30,10 +30,10 @@ class Producer extends BasePulsarClient {
    * @param {object} message Message to be placed onto the topic/queue
    */
   async sendMessage(topic, message, props = {}) {
-    // Create a producer
-    await super.connect();
-
     try {
+      // Create a producer
+      await super.connect();
+
       const producer = await this.client.createProducer({
         topic: topic,
         properties: props
