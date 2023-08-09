@@ -39,7 +39,6 @@ it("Doesn't Error on empty config", async () => {
     expect(pulsarClient.settings.tlsAllowInsecureConnection).toBe(config.tlsAllowInsecureConnection);
   });
 
-
   it("Creates a Client properly with JWT", async () => {
     let config = {};
     config.path = "pulsar://localhost:1000";
@@ -51,6 +50,21 @@ it("Doesn't Error on empty config", async () => {
     await pulsarClient.connect();
     expect(pulsarClient.client).toBeTruthy();
   });
+
+  it("Creates a Client properly with OAuth2", async () => {
+    let config = {};
+    config.path = "pulsar://localhost:1000";
+    config.client_id = "1234abcd";
+    config.client_secret = "abcd1234";
+    config.issuer_url = "https://accounts.google.com";
+    config.grant_type = "client_credentials";
+
+    let pulsarClient = new BasePulsarClient(config);
+
+    await pulsarClient.connect();
+    expect(pulsarClient.client).toBeTruthy();
+  });
+
 
   it("Creates a Client properly without JWT", async () => {
     let config = {};
