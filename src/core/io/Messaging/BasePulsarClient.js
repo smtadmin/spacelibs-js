@@ -34,15 +34,7 @@ class BasePulsarClient {
       this.settings.tlsAllowInsecureConnection = false;
     }
 
-    if (this.settings.client_id !== undefined &&
-      this.settings.client_secret !== undefined &&
-      this.settings.issuer_url !== undefined &&
-      this.settings.grant_type !== undefined) {
-        this.oauthCredentials = true;
-      }
-
   }
-
   /**
    * Connects to the Pulsar server and returns a client
    * @returns New Pulsar Client
@@ -70,7 +62,7 @@ class BasePulsarClient {
   async connect() {
 
     // Create a Pulsar client
-    if(this.settings.oauthCredentials) {
+    if(this.hasOAuth()) {
       this.client = new Client({
         serviceUrl: this.settings.path,
         authentication: new AuthenticationOauth2({type: this.settings.grant_type, 
@@ -88,6 +80,13 @@ class BasePulsarClient {
 
   isTLSAllowInsecureConnection() {
     return this.settings.tlsAllowInsecureConnection === true || this.settings.tlsAllowInsecureConnection === 'true';
+  }
+  
+  hasOAuth(){
+    return this.settings.client_id !== undefined && 
+            this.settings.client_secret !== undefined &&
+            this.issuer_url !== undefined && 
+            this.issuer_url !== undefined;
   }
 }
 
