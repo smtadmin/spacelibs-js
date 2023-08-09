@@ -28,13 +28,27 @@ it("Doesn't Error on empty config", async () => {
   it("Configures a pulsarClient properly", async () => {
     let config = {};
     config.path = "pulsar://localhost:1000";
+    config.jwtToken = "1234abcd";
     config.tlsAllowInsecureConnection = true;
 
 
     let pulsarClient = new BasePulsarClient(config);
 
     expect(pulsarClient.settings.path).toBe(config.path);
+    expect(pulsarClient.settings.jwtToken).toBe(config.jwtToken);
     expect(pulsarClient.settings.tlsAllowInsecureConnection).toBe(config.tlsAllowInsecureConnection);
+  });
+
+  it("Creates a Client properly with JWT", async () => {
+    let config = {};
+    config.path = "pulsar://localhost:1000";
+    config.jwtToken = "1234abcd";
+
+
+    let pulsarClient = new BasePulsarClient(config);
+
+    await pulsarClient.connect();
+    expect(pulsarClient.client).toBeTruthy();
   });
 
   it("Creates a Client properly with OAuth2", async () => {

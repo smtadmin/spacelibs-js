@@ -13,7 +13,7 @@
  */
 
 // Imports for this class
-import { Client, AuthenticationOauth2 } from "pulsar-client";
+import { Client, AuthenticationOauth2, AuthenticationToken } from "pulsar-client";
 
 /**
  * Pulsar Message consumer
@@ -22,7 +22,7 @@ class BasePulsarClient {
   /**
    * Constructs the consumer with the appropriate host and port
    * @param {object} config Configuration for this app.  Must include the 
-   * host param (URL of the pulsar server), the port of the server, client_id, client_secret, and issuer_url
+   * host param (URL of the pulsar server) and the port of the server
    */
    constructor(config = {}) {
     this.settings = config;
@@ -35,25 +35,6 @@ class BasePulsarClient {
     }
 
   }
-  /**
-   * Connects to the Pulsar server and returns a client
-   * @returns New Pulsar Client
-   */
-  // async connect() {
-
-  //   // Create a Pulsar client
-  //   if(this.settings.jwtToken) {
-  //     this.client = new Client({
-  //       serviceUrl: this.settings.path,
-  //       authentication: new AuthenticationToken({token: this.settings.jwtToken}),
-  //       tlsAllowInsecureConnection: this.isTLSAllowInsecureConnection(),
-  //     });
-  //   } else {
-  //     this.client = new Client({
-  //       serviceUrl: this.settings.path
-  //     });
-  //   }
-  // }
 
   /**
    * Connects to the Pulsar server and returns a client
@@ -62,11 +43,16 @@ class BasePulsarClient {
   async connect() {
 
     // Create a Pulsar client
-    if(this.hasOAuth()) {
+    if(this.settings.jwtToken) {
       this.client = new Client({
         serviceUrl: this.settings.path,
-        authentication: new AuthenticationOauth2({type: this.settings.grant_type, 
-                                                  client_id: this.settings.client_id, 
+        authentication: new AuthenticationToken({token: this.settings.jwtToken}),
+        tlsAllowInsecureConnection: this.isTLSAllowInsecureConnection(),
+      });
+    } else if(this.hasOAuth()) {
+      this.client = new Client({
+        serviceUrl: this.settings.path,
+        authentication: new AuthenticationOauth2({client_id: this.settings.client_id, 
                                                   client_secret: this.settings.client_secret, 
                                                   issuer_url: this.settings.issuer_url}),
         tlsAllowInsecureConnection: this.isTLSAllowInsecureConnection(),
@@ -85,7 +71,6 @@ class BasePulsarClient {
   hasOAuth(){
     return this.settings.client_id !== undefined && 
             this.settings.client_secret !== undefined &&
-            this.issuer_url !== undefined && 
             this.issuer_url !== undefined;
   }
 }
