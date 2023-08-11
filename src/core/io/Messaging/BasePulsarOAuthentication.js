@@ -16,12 +16,18 @@
 // Imports for this class
 import axios from "axios";
 import qs from "qs"
+import { schedule } from "node-cron";
 
 class BasePulsarOAuthentication {
 
     constructor(config = {}) {
         this.settings = config;
 		this.token = "";
+		
+        // If enabled, supports scheduling via a cron expression
+        if(this.settings.cron){
+            schedule(this.settings.cron, this.updateToken);
+        } else { this.updateToken(); }
     }
 
     //Returns JWT token
@@ -35,9 +41,9 @@ class BasePulsarOAuthentication {
 	 * If enabled on the application, supports scheduling via a Spring Cron expression
 	 */
 	async updateToken() {
-		console.log("Settings");
-		console.log(this.settings);
-		if(this.hasNPEAuth()) {
+		if(this.settings.jwtToken){
+            this.token = this.settings.jwtToken;
+        } else if(this.hasNPEAuth()) {
 			this.token = await this._retrieveNPEJWTToken();
 		} else {
 			//Authenticator requires at least an empty string to avoid an NPE.

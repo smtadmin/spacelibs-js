@@ -59,6 +59,8 @@
   "dependencies": {
     "axios": "^0.27.2",
     "babel-preset-react-app": "^10.0.1",
+    "cron-schedule": "^4.0.0",
+    "node-cron": "^3.0.0",
     "pulsar-client": "^1.6.2",
     "qs": "^6.11.2"
   }
