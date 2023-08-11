@@ -14,12 +14,14 @@
 
 
 // Imports for this class
-import BaseHTTPService from "../BaseHTTPService/BaseHTTPService";
+import axios from "axios";
+import qs from "qs"
 
 class BasePulsarOAuthentication {
+
     constructor(config = {}) {
         this.settings = config;
-		this.updateToken();
+		this.token = "";
     }
 
     //Returns JWT token
@@ -32,9 +34,11 @@ class BasePulsarOAuthentication {
 	 *
 	 * If enabled on the application, supports scheduling via a Spring Cron expression
 	 */
-	updateToken() {
+	async updateToken() {
+		console.log("Settings");
+		console.log(this.settings);
 		if(this.hasNPEAuth()) {
-			this._retrieveNPEJWTToken();
+			this.token = await this._retrieveNPEJWTToken();
 		} else {
 			//Authenticator requires at least an empty string to avoid an NPE.
 			this.token = "";
@@ -61,25 +65,24 @@ class BasePulsarOAuthentication {
 	 * --data-urlencode 'grant_type=client_credentials'
 	 * @param reg
 	 */
-	_retrieveNPEJWTToken() {
-		token = null;
-
-		if(config == null) {
+	async _retrieveNPEJWTToken() {
+		if(this.settings == null) {
 			return;
 		}
-		postBody = {
-            client_id: this.settings.config.client_id,
+		let postBody = {
+            client_id: this.settings.client_id,
             client_secret: this.settings.client_secret,
             scope: this.settings.scope,
-            grant_type: this.grant_type
+			grant_type:this.settings.authorizationGrantType
         }
 
-		try {
-			data = BaseHTTPService.insert(this.settings.tokenUri,postBody,JSON.parse);
-			token = data.access_token;
-		} catch(error) {
-			console.log(error)
-		}
+		return await axios.post(`${this.settings.tokenUri}`, qs.stringify(postBody), {headers: { 'content-type': 'application/x-www-form-urlencoded' }})
+			.then(
+			async function (response) {
+				return response.data.access_token;
+		}).catch(async (err) => {
+			console.log(err);
+		});
 	}
 
 }
