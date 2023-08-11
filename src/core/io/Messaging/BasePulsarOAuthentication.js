@@ -15,11 +15,16 @@
 
 // Imports for this class
 import BaseHTTPService from "../BaseHTTPService/BaseHTTPService";
+import { schedule } from "node-cron";
 
 class BasePulsarOAuthentication {
     constructor(config = {}) {
         this.settings = config;
-		this.updateToken();
+		
+        // If enabled, supports scheduling via a cron expression
+        if(this.settings.cron){
+            schedule(this.settings.cron, this.updateToken);
+        } else { this.updateToken(); }
     }
 
     //Returns JWT token
@@ -29,11 +34,11 @@ class BasePulsarOAuthentication {
 
 	/**
 	 * Updates NPE KeyCloak token for the PulsarClient.
-	 *
-	 * If enabled on the application, supports scheduling via a Spring Cron expression
 	 */
 	updateToken() {
-		if(this.hasNPEAuth()) {
+		if(this.settings.jwtToken){
+            this.token = this.settings.jwtToken;
+        } else if(this.hasNPEAuth()) {
 			this._retrieveNPEJWTToken();
 		} else {
 			//Authenticator requires at least an empty string to avoid an NPE.
