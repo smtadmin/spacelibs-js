@@ -58,6 +58,7 @@ class BasePulsarOAuthentication {
 	 * @param reg
 	 */
 	async _retrieveNPEJWTToken() {
+		process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 		let postBody = {
             client_id: this.settings.client_id,
             client_secret: this.settings.client_secret,
