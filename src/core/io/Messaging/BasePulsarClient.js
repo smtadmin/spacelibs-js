@@ -14,6 +14,7 @@
 
 // Imports for this class
 import { Client, AuthenticationToken } from "pulsar-client";
+import BasePulsarOAuthentication from "./BasePulsarOAuthentication";
 
 /**
  * Pulsar Message consumer
@@ -34,6 +35,10 @@ class BasePulsarClient {
       this.settings.tlsAllowInsecureConnection = false;
     }
 
+    this.auth = new BasePulsarOAuthentication(this.settings);
+
+    
+
   }
 
   /**
@@ -50,8 +55,10 @@ class BasePulsarClient {
         tlsAllowInsecureConnection: this.isTLSAllowInsecureConnection(),
       });
     } else {
+      await this.auth.updateToken();
       this.client = new Client({
-        serviceUrl: this.settings.path
+        serviceUrl: this.settings.path,
+        authentication: new AuthenticationToken({token: this.auth.token}),
       });
     }
   }
