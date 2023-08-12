@@ -58,6 +58,7 @@ class BasePulsarOAuthentication {
 	 * @param reg
 	 */
 	async _retrieveNPEJWTToken() {
+		let storeEnv = process.env.NODE_TLS_REJECT_UNAUTHORIZED;
 		process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 		let postBody = {
             client_id: this.settings.client_id,
@@ -69,6 +70,7 @@ class BasePulsarOAuthentication {
 		return await axios.post(`${this.settings.tokenUri}`, qs.stringify(postBody), {headers: { 'content-type': 'application/x-www-form-urlencoded' }})
 			.then(
 			async function (response) {
+				process.env.NODE_TLS_REJECT_UNAUTHORIZED = storeEnv;
 				return response.data.access_token;
 		}).catch(async (err) => {
 			console.log(err);
