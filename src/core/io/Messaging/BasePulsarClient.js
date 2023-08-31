@@ -59,6 +59,7 @@ class BasePulsarClient {
       this.client = new Client({
         serviceUrl: this.settings.path,
         authentication: new AuthenticationToken({token: this.auth.token}),
+        tlsAllowInsecureConnection: this.isTLSAllowInsecureConnection(),
       });
     }
   }
