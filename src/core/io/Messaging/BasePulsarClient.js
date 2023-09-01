@@ -49,7 +49,6 @@ class BasePulsarClient {
 
     // Create a Pulsar client
     if(this.settings.jwtToken) {
-      console.log(this.settings);
       this.client = new Client({
         serviceUrl: this.settings.path,
         authentication: new AuthenticationToken({token: this.settings.jwtToken}),
@@ -58,7 +57,6 @@ class BasePulsarClient {
     } else {
       await this.auth.updateToken();
       this.settings.jwtToken = this.auth.token;
-      console.log(this.settings);
       this.client = new Client({
         serviceUrl: this.settings.path,
         authentication: new AuthenticationToken({token: this.settings.jwtToken}),
