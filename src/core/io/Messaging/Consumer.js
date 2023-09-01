@@ -34,7 +34,7 @@ class Consumer extends BasePulsarClient {
    * @param {string} subscription Message to be placed onto the topic/queue
    * @param {function} listener Function to call when a message is received
    */
-  async listen(topic, subscription, listener) {
+  async listen(topic, subscription, listener, subscriptionType = 'Shared') {
     try {
 
       // Create a client
@@ -44,7 +44,7 @@ class Consumer extends BasePulsarClient {
       this.consumer = await this.client.subscribe({
           topic: topic,
           subscription: subscription,
-          subscriptionType: 'Exclusive',
+          subscriptionType: subscriptionType,
           listener: listener
       });
     } catch(ex) {
