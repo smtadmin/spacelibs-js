@@ -56,9 +56,11 @@ class BasePulsarClient {
       });
     } else {
       await this.auth.updateToken();
+      this.settings.jwtToken = this.auth.token;
       this.client = new Client({
         serviceUrl: this.settings.path,
-        authentication: new AuthenticationToken({token: this.auth.token}),
+        authentication: new AuthenticationToken({token: this.settings.jwtToken}),
+        tlsAllowInsecureConnection: this.isTLSAllowInsecureConnection(),
       });
     }
   }
